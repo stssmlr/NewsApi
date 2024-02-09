@@ -16,10 +16,8 @@ namespace NewsApi.Core.Entities
 
         //public string Author { get; set; } = string.Empty;
         public int AuthorId { get; set; }
-        public virtual Author Author { get; set; }
 
         public int CategoryId { get; set; }
-        public virtual Category Category { get; set; }
 
         public int CountOfVisits { get; set; }
 

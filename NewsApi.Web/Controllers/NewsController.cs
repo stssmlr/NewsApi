@@ -10,9 +10,9 @@ namespace NewsApi.Web.Controllers
     [ApiController]
     public class NewsController : ControllerBase
     {
-        private readonly INewsService _newsService;
+        private readonly ITemplateService<News> _newsService;
 
-        public NewsController(INewsService newsService)
+        public NewsController(ITemplateService<News> newsService)
         {
             _newsService = newsService;
         }
@@ -30,26 +30,26 @@ namespace NewsApi.Web.Controllers
             var news = await _newsService.Get(Id);
             return Ok(news);
         }
-        [HttpDelete("DeleteById")]
-        public async Task<IActionResult> DeleteById(int Id)
-        {
-            var news = await _newsService.DeleteById(Id);
-            return Ok(news);
-        }
         [HttpDelete("Delete")]
+        public async Task<IActionResult> Delete(int Id)
+        {
+            await _newsService.Delete(Id);
+            return Ok();
+        }
+        /*[HttpDelete("Delete")]
         public async Task<IActionResult> Delete(News n)
         {
             var news = await _newsService.Delete(n);
             return Ok(news);
-        }
+        }*/
         [HttpPatch("Update")]
-        public async Task<IActionResult> Update(NewsUpdateDto n)
+        public async Task<IActionResult> Update(News n)
         {
             await _newsService.Update(n);
             return Ok();
         }
         [HttpPost("Insert")]
-        public async Task<IActionResult> Insert(NewsDto model)
+        public async Task<IActionResult> Insert(News model)
         {
             await _newsService.Insert(model);
             return Ok();

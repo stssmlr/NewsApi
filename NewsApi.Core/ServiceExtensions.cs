@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using NewsApi.Core.AutoMapper;
+using NewsApi.Core.Entities;
 using NewsApi.Core.Interface;
 using NewsApi.Core.Interfaces;
 using NewsApi.Core.Service;
@@ -20,6 +21,7 @@ namespace NewsApi.Core
             services.AddScoped<INewsService, NewsService>();
             services.AddScoped<IUsersService, UsersService>();
             services.AddScoped<IRolesService, RolesService>();
+            services.AddScoped(typeof(ITemplateService<News>), typeof(TemplateService<News>));
         }
         public static void AddMapping(this IServiceCollection services)
         {
